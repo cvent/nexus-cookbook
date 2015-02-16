@@ -1,0 +1,21 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-6.5
+
+suites:
+  - name: default
+    run_list:
+      - recipe[nexus::default]
+    attributes:
+      nexus:
+        cli:
+          ssl:
+            verify: "false"
+        app_server_proxy:
+          use_self_signed: "true"
