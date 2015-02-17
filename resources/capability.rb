@@ -1,9 +1,9 @@
 #
 # Cookbook Name:: nexus
-# Recipes:: cli
+# Resource:: hosted_repository
 #
-# Author:: Jesse Howarth (<him@jessehowarth.com>)
-# Copyright 2013, Riot Games
+# Author:: Jonathan Morley (<jmorley@cvent.com>)
+# Copyright 2015, Cvent Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,10 @@
 # limitations under the License.
 #
 
+actions :create, :delete, :update
+default_action :create
 
-chef_gem "nexus_cli" do
-    version "4.1.1"
-end
+attribute :type, :kind_of                 => String, :name_attribute => true
+attribute :id, :kind_of                   => String, :name_attribute => true
+attribute :enabled, :kind_of              => [TrueClass, FalseClass], :default => nil
+attribute :properties, :kind_of           => Hash, :default => nil

@@ -19,6 +19,13 @@
 #
 user_home = ::File.join(node[:nexus][:base_dir], node[:nexus][:user])
 
+case node['platform_family']
+when 'debian'
+    include_recipe 'apt'
+when 'rhel'
+    include_recipe 'yum'
+end
+
 group node[:nexus][:group] do
   system true
 end
